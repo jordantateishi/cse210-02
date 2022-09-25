@@ -1,5 +1,5 @@
-from game.director import Director
-from game.hilo import hilo
+from director import Director
+from hilo import hilo
 
 director = Director()
 director.start_game()

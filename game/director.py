@@ -1,4 +1,4 @@
-from game.hilo import hilo
+from hilo import hilo
 
 
 class Director:
@@ -12,6 +12,7 @@ class Director:
         self.is_playing = True
         self.score = 0
         self.total_score = 300
+        
 
     def start_game(self):
         """Starts the game by running the main game loop.
@@ -19,37 +20,40 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
+        player_guess = 'h'
         while self.is_playing and self.total_score > 0:
-            self.get_inputs()
-            self.do_updates()
+            self.get_inputs(player_guess)
+            self.do_updates(player_guess)
             self.do_outputs()
 
-    def get_inputs(self, card, drawn):
+    def get_inputs(self, player_guess):
         """Ask the user if they want to roll.
 
         Args:
             self (Director): An instance of Director.
         """
-        
+        card = hilo.draw_card(self)
+        drawn = hilo.draW_new(self)
         print(f'\nThe card is: {card}')
         player_guess = input('Higher or lower? [h/l] ')
         print(f'Next card was: {drawn}')
-        return player_guess
+        
+        
 
        
-    def do_updates(self,card,drawn,player_guess):
+    def do_updates(self, player_guess):
         """Updates the player's score.
 
         Args:
             self (Director): An instance of Director.
         """
-        if card > drawn and player_guess == 'h':
+        if hilo.draw_card(self) > hilo.draW_new(self) and player_guess == 'h':
             self.score = -75
-        elif card > drawn and player_guess == 'l':
+        elif hilo.draw_card(self) > hilo.draW_new(self) and player_guess == 'l':
             self.score = 100
-        elif card < drawn and player_guess == 'h':
+        elif hilo.draw_card(self) < hilo.draW_new(self) and player_guess == 'h':
             self.score = 100
-        elif card < drawn and player_guess =='l':
+        elif hilo.draw_card(self) < hilo.draW_new(self) and player_guess == 'l':
             self.score = -75
 
 
